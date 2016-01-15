@@ -1,0 +1,124 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" />
+        <link href="https://api.tiles.mapbox.com/mapbox.js/v2.2.1/mapbox.css" rel="stylesheet" />
+        
+        <script src="https://api.tiles.mapbox.com/mapbox.js/v2.2.1/mapbox.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/leaflet.js"></script>
+        <script type="text/javascript" src="js/functions.js"></script>
+        
+        <style>
+             body { margin:0; padding:0; }
+             #map { position:absolute; top:0; bottom:0; width:100%; }
+        </style>
+        
+        <title>Hello World</title>
+    </head>
+    <body>
+       
+        <div id="map">
+        This is the map page
+        
+        <script type="text/javascript">
+            
+            // INIT AND PAGE NAVIGATION FUNCTIONALITY
+            
+            function onLoad(){
+                document.addEventListener("deviceready", onDeviceReady, true);
+            }
+
+        
+        
+        
+        
+        
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                                          center: {lat: -34.397, lng: 150.644},
+                                          zoom: 6
+                                          });
+                                          var infoWindow = new google.maps.InfoWindow({map: map});
+                                          
+                                          // Try HTML5 geolocation.
+                                          console.log(navigator.geolocation);
+                                          if (navigator.geolocation) {
+                                              navigator.geolocation.getCurrentPosition(function(position) {
+                                                                                       var pos = {
+                                                                                       lat: position.coords.latitude,
+                                                                                       lng: position.coords.longitude
+                                                                                       };
+                                                                                       
+                                                                                       infoWindow.setPosition(pos);
+                                                                                       infoWindow.setContent('Location found.');
+                                                                                       map.setCenter(pos);
+                                                                                       }, function() {
+                                                                                       handleLocationError(true, infoWindow, map.getCenter());
+                                                                                       });
+                                          } else {
+                                              // Browser doesn't support Geolocation
+                                              handleLocationError(false, infoWindow, map.getCenter());
+                                          }
+        }
+        
+        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+            infoWindow.setPosition(pos);
+            infoWindow.setContent(browserHasGeolocation ?
+                                  'Error: The Geolocation service failed.' :
+                                  'Error: Your browser doesn\'t support geolocation.');
+        }
+        
+        
+        
+        
+            </script>
+        <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBF6Qc2IYiC64ar6FIT3LiNmokaWzFDuCQ&callback=initMap">
+            </script>
+        
+        
+        
+        
+        <!-- MENU BAR SECTION -->
+        <div class="tab-bar">
+            <label class="tab-bar__item" page="index.html">
+                <input type="radio" name="tab-bar-a" checked="checked">
+                    <button class="tab-bar__button">
+                        <i class="tab-bar__icon ion-stop"></i>
+                        
+                        <a href="/HelloWorld/Staging/www/mapPage.html"><div class="tab-bar__label">Map</div></a>
+                    </button>
+            </label>
+            
+            <label class="tab-bar__item" >
+                <input type="radio" name="tab-bar-a" page="profile-page.html">
+                    <button class="tab-bar__button">
+                        <i class="tab-bar__icon ion-record"></i>
+                        <div class="tab-bar__label">Profile</div>
+                    </button>
+            </label>
+            
+            <label class="tab-bar__item">
+                <input type="radio" name="tab-bar-a">
+                    <button class="tab-bar__button">
+                        <i class="tab-bar__icon ion-star"></i>
+                        <div class="tab-bar__label">Friends</div>
+                    </button>
+                    </label>
+            <label class="tab-bar__item">
+                <input type="radio" name="tab-bar-a">
+                    <button class="tab-bar__button">
+                        <i class="tab-bar__icon ion-star"></i>
+                        <div class="tab-bar__label">Discover</div>
+                    </button>
+                    </label>
+        </div>
+</html>
